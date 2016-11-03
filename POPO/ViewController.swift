@@ -18,8 +18,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         image.delegate = self
         image.sourceType = UIImagePickerControllerSourceType.photoLibrary
         image.allowsEditing = false
+        self.present(image, animated: true){
+            // After completion
+        }
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            theImageView.image = image
+        } else {
+            // Display error message
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
